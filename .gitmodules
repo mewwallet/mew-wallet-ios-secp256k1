@@ -1,3 +1,3 @@
-[submodule "Sources/MEW-wallet-iOS-secp256k1"]
-	path = Sources/MEW-wallet-iOS-secp256k1
-url=https://github.com/MyEtherWallet/MEW-wallet-iOS-secp256k1.git
+[submodule "Sources/mew-wallet-ios-secp256k1-lib"]
+	path = Sources/mew-wallet-ios-secp256k1-lib
+	url = https://github.com/mewwallet/mew-wallet-ios-secp256k1-lib.git
