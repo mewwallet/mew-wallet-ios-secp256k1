@@ -6,7 +6,6 @@
 //  Copyright © 2023 MyEtherWallet Inc. All rights reserved.
 //
 
-
 import Foundation
 
 /// This extension adds a convenience property to the `Data` struct,
