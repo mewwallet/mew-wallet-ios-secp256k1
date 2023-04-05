@@ -1,4 +1,4 @@
-name: build-test
+name: macos
 
 on:
   push:
@@ -7,14 +7,21 @@ on:
 
 jobs:
   build:
-
+    
     runs-on: macos-latest
-
+    
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: true
-    - name: Build
+        
+    - name: Select Xcode Version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    
+    - name: Swift Package Build
       run: swift build -v
+    
     - name: Run tests
-      run: swift test -v
+      run: swift test -c release
