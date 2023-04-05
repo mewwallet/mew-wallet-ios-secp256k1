@@ -1,0 +1,73 @@
+name: Documentation
+
+on:
+  push:
+  release:
+    types:
+      - published
+#    branches:
+#      - main
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+        
+    - name: Select Xcode Version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
+    - name: Checkout gh-pages Branch
+      uses: actions/checkout@v3
+      with:
+        ref: gh-pages
+        path: docs-out
+
+    - name: Build documentation
+      run: >
+        rm -rf docs-out/.git;
+        rm -rf docs-out/main;
+        git tag -l --sort=-v:refname | grep -e "\d\+\.\d\+.0" | tail -n +6 | xargs -I {} rm -rf {};
+
+        for tag in $(echo "main"; git tag -l --sort=-v:refname | grep -e "\d\+\.\d\+.0" | head -6);
+        do
+          if [ -d "docs-out/$tag/data/documentation/mew-wallet-ios-secp256k1" ]
+          then
+            echo "✅ Documentation for "$tag" already exists.";
+          else
+            echo "⏳ Generating documentation for mew-wallet-ios-secp256k1 @ "$tag" release.";
+            rm -rf "docs-out/$tag";
+
+            git checkout .;
+            git checkout "$tag";
+
+            swift package \
+              --allow-writing-to-directory docs-out/"$tag" \
+              generate-documentation \
+              --target mew-wallet-ios-secp256k1 \
+              --output-path docs-out/"$tag" \
+              --transform-for-static-hosting \
+              --hosting-base-path /mew-wallet-ios-secp256k1/"$tag" \
+              && echo "✅ Documentation generated for mew-wallet-ios-secp256k1 @ "$tag" release." \
+              || echo "⚠️ Documentation skipped for mew-wallet-ios-secp256k1 @ "$tag".";
+          fi;
+        done
+
+    - name: Fix permissions
+      run: 'sudo chown -R $USER docs-out'
+
+    - name: Publish documentation to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.7
+      with:
+        branch: gh-pages
+        folder: docs-out
+        single-commit: true
