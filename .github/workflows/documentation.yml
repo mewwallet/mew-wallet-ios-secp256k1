@@ -31,10 +31,24 @@ jobs:
 
       - name: Build DocC
         run: |
-          swift package resolve;
-          xcodebuild docbuild -scheme mew-wallet-ios-secp256k1 -derivedDataPath /tmp/docbuild -destination 'generic/platform=iOS';
+          swift package update;
+          
+          DERIVED_DATA_PATH=.build/docbuild
+          
+          PROJECT_NAME='mew-wallet-ios-secp256k1'
+          DESTINATION='platform=iOS Simulator,name=iPhone 13 Pro Max'
+          
+          swift package dump-pif > /dev/null || true
+          xcodebuild clean -scheme $PROJECT_NAME -destination $DESTINATION > /dev/null || true
+          
+          xcodebuild docbuild \
+           -scheme $PROJECT_NAME \
+           -destination $DESTINATION \
+           -configuration Release \
+           -derivedDataPath $DERIVED_DATA_PATH
+           
           $(xcrun --find docc) process-archive \
-            transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/mew-wallet-ios-secp256k1.doccarchive \
+            transform-for-static-hosting $DERIVED_DATA_PATH/Build/Products/Debug-iphoneos/mew-wallet-ios-secp256k1.doccarchive \
             --hosting-base-path mew-wallet-ios-secp256k1 \
             --output-path docs
       - name: Deploy to GitHub Pages
