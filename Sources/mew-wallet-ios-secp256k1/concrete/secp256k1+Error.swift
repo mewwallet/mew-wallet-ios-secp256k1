@@ -6,7 +6,6 @@
 //  Copyright © 2023 MyEtherWallet Inc. All rights reserved.
 //
 
-
 import Foundation
 
 public struct secp256k1 { 
