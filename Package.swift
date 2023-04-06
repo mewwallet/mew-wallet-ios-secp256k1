@@ -19,8 +19,7 @@ let package = Package(
       targets: ["mew-wallet-ios-secp256k1"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0"),
-    .package(url: "https://github.com/realm/SwiftLint.git", from: "0.51.0")
+    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0")
   ],
   targets: [
     .target(
@@ -116,6 +115,9 @@ let package = Package(
 )
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+package.dependencies
+  .append(.package(url: "https://github.com/realm/SwiftLint.git", from: "0.51.0"))
+
 package
   .targets
   .first(where: { $0.name == "mew-wallet-ios-secp256k1" })?
