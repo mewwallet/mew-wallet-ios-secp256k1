@@ -6,7 +6,6 @@
 //  Copyright © 2023 MyEtherWallet Inc. All rights reserved.
 //
 
-
 import XCTest
 @testable import mew_wallet_ios_secp256k1
 import mew_wallet_ios_secp256k1_lib
@@ -15,7 +14,7 @@ final class secp256k1_pubkey_Serialization_Tests: XCTestCase {
   func testPubkeySerialization() throws {
     let context = try secp256k1_context()
     
-    let privateKey = try Array<UInt8>.secRandom(length: 32)
+    let privateKey = try [UInt8].secRandom(length: 32)
     
     var publicKey = secp256k1_pubkey()
     XCTAssertEqual(secp256k1_ec_pubkey_create(context.rawValue, &publicKey, privateKey), 1)

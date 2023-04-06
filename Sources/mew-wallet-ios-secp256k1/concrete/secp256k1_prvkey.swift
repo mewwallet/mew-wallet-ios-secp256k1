@@ -6,7 +6,6 @@
 //  Copyright © 2023 MyEtherWallet Inc. All rights reserved.
 //
 
-
 import Foundation
 import mew_wallet_ios_secp256k1_lib
 

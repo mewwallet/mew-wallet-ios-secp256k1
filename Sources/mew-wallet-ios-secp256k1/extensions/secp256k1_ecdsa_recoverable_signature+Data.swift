@@ -6,7 +6,6 @@
 //  Copyright © 2023 MyEtherWallet Inc. All rights reserved.
 //
 
-
 import Foundation
 import mew_wallet_ios_secp256k1_lib
 
@@ -31,7 +30,7 @@ extension secp256k1_ecdsa_recoverable_signature {
       
       // Create a secp256k1 context for serialization.
       let context = try secp256k1_context()
-
+      
       var `self` = self
       // Serialize the recoverable signature into the `serialized` array.
       let result = secp256k1_ecdsa_recoverable_signature_serialize_compact(context.rawValue, &serialized, &v, &self)
