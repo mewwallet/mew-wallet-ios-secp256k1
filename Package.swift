@@ -116,3 +116,5 @@ let package = Package(
     )
   ]
 )
+
+// swiftlint:enable all
