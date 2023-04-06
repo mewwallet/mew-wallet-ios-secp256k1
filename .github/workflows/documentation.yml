@@ -40,7 +40,7 @@ jobs:
       uses: fwcd/swift-docc-action@v1
       with:
         target: mew-wallet-ios-secp256k1
-        output: ./docs
+        output: ./public
         transform-for-static-hosting: 'true'
         disable-indexing: 'true'
         hosting-base-path: mew-wallet-ios-secp256k1
@@ -48,7 +48,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
-        path: ./docs
+        path: ./public
 
   deploy:
     environment:
