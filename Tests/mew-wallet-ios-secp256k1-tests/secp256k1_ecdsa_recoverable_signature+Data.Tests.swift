@@ -12,6 +12,7 @@ import XCTest
 final class secp256k1_ecdsa_recoverable_signature_Data_Tests: XCTestCase {
   func testRawPropertyConversion() {
     // Create an example secp256k1_ecdsa_recoverable_signature instance.
+    // swiftlint:disable:next large_tuple
     let data: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
                UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
                UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,

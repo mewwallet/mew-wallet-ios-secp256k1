@@ -1,10 +1,15 @@
 // swift-tools-version:5.7
 // The swift-tools-version declares the minimum version of Swift required to build this package.
+// swiftlint:disable all
 
 import PackageDescription
 
 let package = Package(
   name: "mew-wallet-ios-secp256k1",
+  platforms: [
+    .iOS(.v11),
+    .macOS(.v12)
+  ],
   products: [
     .library(
       name: "mew-wallet-ios-secp256k1-lib",
@@ -22,7 +27,8 @@ let package = Package(
       dependencies: [
         "mew-wallet-ios-secp256k1-lib"
       ],
-      path: "Sources/mew-wallet-ios-secp256k1"
+      path: "Sources/mew-wallet-ios-secp256k1",
+      plugins: []
     ),
     .target(
       name: "mew-wallet-ios-secp256k1-lib",
@@ -100,6 +106,27 @@ let package = Package(
     ),
     .testTarget(
       name: "mew-wallet-ios-secp256k1-tests",
-      dependencies: ["mew-wallet-ios-secp256k1"]),
+      dependencies: ["mew-wallet-ios-secp256k1"],
+      plugins: []
+    )
   ]
 )
+
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+package.dependencies
+  .append(.package(url: "https://github.com/realm/SwiftLint.git", from: "0.51.0"))
+
+package
+  .targets
+  .first(where: { $0.name == "mew-wallet-ios-secp256k1" })?
+  .plugins?
+  .append(.plugin(name: "SwiftLintPlugin", package: "SwiftLint"))
+
+package
+  .targets
+  .first(where: { $0.name == "mew-wallet-ios-secp256k1-tests" })?
+  .plugins?
+  .append(.plugin(name: "SwiftLintPlugin", package: "SwiftLint"))
+#endif
+
+// swiftlint:enable all
