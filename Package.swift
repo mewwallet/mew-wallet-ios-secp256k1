@@ -29,9 +29,7 @@ let package = Package(
         "mew-wallet-ios-secp256k1-lib"
       ],
       path: "Sources/mew-wallet-ios-secp256k1",
-      plugins: [
-        .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
-      ]
+      plugins: []
     ),
     .target(
       name: "mew-wallet-ios-secp256k1-lib",
@@ -116,5 +114,13 @@ let package = Package(
     )
   ]
 )
+
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+package
+  .targets
+  .first(where: { $0.name == "mew-wallet-ios-secp256k1" })?
+  .plugins?
+  .append(.plugin(name: "SwiftLintPlugin", package: "SwiftLint"))
+#endif
 
 // swiftlint:enable all
