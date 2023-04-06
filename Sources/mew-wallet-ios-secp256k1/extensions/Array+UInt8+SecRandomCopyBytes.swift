@@ -26,8 +26,7 @@ extension Array where Element == UInt8 {
     }
 #else
     // Use SystemRandomNumberGenerator, a cryptographically secure random number generator provided by Swift's standard library, as a fallback option for non-Apple platforms.
-//    var generator = SystemRandomNumberGenerator()
-    var g = SystemRandomNumberGenerator()
+    var generator = SystemRandomNumberGenerator()
     for index in 0..<length {
       bytes[index] = Element.random(in: Element.min...Element.max, using: &generator)
     }
