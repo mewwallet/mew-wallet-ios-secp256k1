@@ -1,7 +1,8 @@
 import XCTest
 
-import MEW_wallet_iOS_secp256k1_packageTests
+import mew_wallet_ios_secp256k1_tests
 
 var tests = [XCTestCaseEntry]()
-tests += MEW_wallet_iOS_secp256k1_packageTests.allTests()
+tests += mew_wallet_ios_secp256k1_tests.__allTests()
+
 XCTMain(tests)
