@@ -1,0 +1,20 @@
+disabled_rules:
+  - trailing_whitespace
+  - trailing_comma
+ 
+identifier_name:
+  excluded:
+    - v
+    - i
+  max_length: 80
+  allowed_symbols: ["_"]
+    
+type_name:
+  allowed_symbols: ["_"]
+  validates_start_with_lowercase: false
+  max_length: 80
+
+line_length:
+  warning: 180
+  error: 230
+  ignores_comments: true

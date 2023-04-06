@@ -108,6 +108,10 @@ let package = Package(
     ),
     .testTarget(
       name: "mew-wallet-ios-secp256k1-tests",
-      dependencies: ["mew-wallet-ios-secp256k1"]),
+      dependencies: ["mew-wallet-ios-secp256k1"],
+      plugins: [
+        .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
+      ]
+    )
   ]
 )

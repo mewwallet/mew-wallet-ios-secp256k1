@@ -43,7 +43,6 @@ final class secp256k1_pubkey_Data: XCTestCase {
     XCTAssertEqual(publicKey.rawValue, publicKeyFromData.rawValue, "Both public keys should have the same raw value.")
   }
   
-  
   func testInvalidPublicKey() {
     let invalidPublicKeyData = Data([UInt8](repeating: 0, count: 33))
     XCTAssertThrowsError(try secp256k1_pubkey(data: invalidPublicKeyData), "An invalid public key should throw an error.") { error in
