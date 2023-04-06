@@ -1,7 +1,6 @@
 name: Deploy DocC
 
 on:
-  push:
   release:
     types:
       - published
