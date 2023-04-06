@@ -47,7 +47,7 @@ jobs:
         
     - name: Fix index.html
       run: |
-      echo "<head><meta http-equiv=\"Refresh\" content=\"0; url='/mew-wallet-ios-secp256k1/documentation/mew_wallet_ios_secp256k1'\" /></head>" > ./output/index.html
+        echo "<head><meta http-equiv=\"Refresh\" content=\"0; url='/mew-wallet-ios-secp256k1/documentation/mew_wallet_ios_secp256k1'\" /></head>" > ./output/index.html
         
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
