@@ -107,9 +107,7 @@ let package = Package(
     .testTarget(
       name: "mew-wallet-ios-secp256k1-tests",
       dependencies: ["mew-wallet-ios-secp256k1"],
-      plugins: [
-        .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
-      ]
+      plugins: []
     )
   ]
 )
@@ -121,6 +119,12 @@ package.dependencies
 package
   .targets
   .first(where: { $0.name == "mew-wallet-ios-secp256k1" })?
+  .plugins?
+  .append(.plugin(name: "SwiftLintPlugin", package: "SwiftLint"))
+
+package
+  .targets
+  .first(where: { $0.name == "mew-wallet-ios-secp256k1-tests" })?
   .plugins?
   .append(.plugin(name: "SwiftLintPlugin", package: "SwiftLint"))
 #endif
