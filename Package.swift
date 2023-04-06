@@ -5,6 +5,10 @@ import PackageDescription
 
 let package = Package(
   name: "mew-wallet-ios-secp256k1",
+  platforms: [
+    .iOS(.v11),
+    .macOS(.v12)
+  ],
   products: [
     .library(
       name: "mew-wallet-ios-secp256k1-lib",
@@ -14,7 +18,8 @@ let package = Package(
       targets: ["mew-wallet-ios-secp256k1"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0")
+    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.1.0"),
+    .package(url: "https://github.com/realm/SwiftLint.git", from: "0.51.0")
   ],
   targets: [
     .target(
@@ -22,7 +27,10 @@ let package = Package(
       dependencies: [
         "mew-wallet-ios-secp256k1-lib"
       ],
-      path: "Sources/mew-wallet-ios-secp256k1"
+      path: "Sources/mew-wallet-ios-secp256k1",
+      plugins: [
+        .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
+      ]
     ),
     .target(
       name: "mew-wallet-ios-secp256k1-lib",
